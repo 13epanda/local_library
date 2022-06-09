@@ -1,20 +1,10 @@
 import {useState} from 'react';
-import {useLocalStorage} from "../useLocalStorage";
 
-const FormAddBook = () => {
+const FormAddBook = (props) => {
     const [author, setAuthor] = useState('');
     const [title, setTitle] = useState('');
     const [cover, setCover] = useState();
-    const [quantity_books, setQuantity_books] = useLocalStorage("quantity_books",0);
 
-    const onBookAddClick = () => {
-        localStorage.setItem('book'+ quantity_books, JSON.stringify({title, author, cover}));
-        JSON.parse(localStorage.getItem('book'+ quantity_books));
-        setQuantity_books(quantity_books + 1)
-        setAuthor('');
-        setTitle('');
-        window.location.reload();
-    }
     const uploadImage = (event) => {
         let reader = new FileReader();
         reader.addEventListener("load", function () {
@@ -26,6 +16,7 @@ const FormAddBook = () => {
         });
         reader.readAsDataURL(event.target.files[0]);
     }
+
     return (
         <section className="formAddBook">
             <h2>Нужно больше книг богу книг</h2>
@@ -65,10 +56,11 @@ const FormAddBook = () => {
                            required
                     />
                 </label>
+                <img className="formAddBook__preview-img" src={cover} width={100} height={100} alt="Превью выбранной обложки книги."/>
                 <input
                     type="button"
                     value="Добавить книгу"
-                    onClick={onBookAddClick}
+                    onClick={() => props.onBookAddClick(author, title, cover)}
                     className="button button-primary"
                 />
             </form>

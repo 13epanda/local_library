@@ -107,8 +107,17 @@ code {
   margin-bottom: 40px;
 }
 
+.formAddBook form {
+  position: relative;
+}
+
 .formAddBook__input {
   margin-bottom: 20px;
+}
+
+.formAddBook__preview-img {
+  display: block;
+  object-fit: cover;
 }
 
 .book-list {
@@ -147,4 +156,16 @@ code {
 
 .delete-book {
   margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  .input-text,
+  .input-image {
+    padding-right: 120px;
+  }
+  .formAddBook__preview-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
